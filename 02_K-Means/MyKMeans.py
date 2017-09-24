@@ -1,3 +1,6 @@
+import numpy as np
+from sklearn.utils.extmath import squared_norm
+
 class MyKMeans():
     """
     Klasa obsługująca wykonanie algorytmu KMeans.
@@ -241,20 +244,22 @@ def min_distances(X, Y):
         
     return labels, distances
             
-
 # =============================================================================
-# UPROSZCZONA WERSJA _k_means._centers_dense
     
 def centers_update(X, labels, n_clusters):
-    # Ilosc probek
+    """
+    Uproszczona wersja _k_means._centers_dense z biblioteki sklearn.
+    Funkcja zwraca zaktualizowaną lokalizacje centroid.
+    """
+    # ilosc probek
     n_samples = X.shape[0]
-    # Ilosc parametrów
+    # ilosc parametrów
     n_features = X.shape[1]
     
-    # Allokacja pamięci dla wektora który będzie przechowywał współrzędne centroid
+    # allokacja pamięci dla wektora który będzie przechowywał współrzędne centroid
     centers = np.zeros((n_clusters, n_features), dtype=np.float64)
     
-    # Wektor opisujący liczebnoć każdego klastra
+    # wektor opisujący liczebnoć każdego klastra
     n_samples_in_cluster = points_in_clusters(labels, n_clusters)
     
     for i in range(n_samples):
@@ -268,26 +273,16 @@ def centers_update(X, labels, n_clusters):
     return centers
 
 
-###############################################################################
+# =============================================================================
     
 def points_in_clusters(labels, n_clusters):
-    # Allokacja pamięci dla numpy arraya któRy będzie przchowywał liczeboci klastrów
+    """
+    Funkcja oblicza liczebność każdego klastra
+    """
+    # allokacja pamięci dla numpy arraya który będzie przchowywał liczeboci klastrów
     cluster_sizes = np.zeros(n_clusters, dtype=np.float64)
     
     for point in labels:
         cluster_sizes[point] += 1
         
     return cluster_sizes
-
-###############################################################################
-
-import pandas as pd
-import numpy as np
-from sklearn.utils.extmath import squared_norm
-
-dataset = pd.read_csv('Mall_Customers.csv')
-X = dataset.iloc[:, [3, 4]].values
-
-claster = MyKMeans(n_clusters=3)
-claster.fit(X)
-print(claster.cluster_centers_)
