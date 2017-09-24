@@ -155,9 +155,7 @@ def init_centroids(X, k, init = 'random'):
     W zależności od wartości zmiennej init zostaje wybrany inny algorytm
     wyboru centroid:
         - "random" - prowadzi do całkowicie losowego wyboru centroid
-        - "kmeans++" - ulepszony sposób wyboru centroid skutkujący lepszą zbierznocią
-        algorytmu oraz lepszym doborem klastrów
-    
+        
     X : array, shape (n_samples, n_features)
     k : poszukiwana iloć klastrów
     init : tryb wyszukiwania centroid
@@ -173,22 +171,8 @@ def init_centroids(X, k, init = 'random'):
         seeds = np.random.permutation(n_samples)[:k]
         # array zawierający losowo wybrane punkty ze zbioru X
         centers = X[seeds]
-        
-    # wybór centroid za pomocą algorytmu kmeans++
-    if isinstance(init, str) and init == 'kmeans++':
-        # array zawierający losowo wybrane punkty ze zbioru X
-        centers = k_means_pp(X, k)
-        
+               
     return centers
-
-# =============================================================================
-
-def k_means_pp(X, k):
-    """
-    Implementacja algorytmu kmeans++, pozwwalacjącego na lepszą inicjację centroid,
-    a w efekcie na lepszą średnią zbierzność algorytmu kmeans.
-    """
-    pass
 
 # =============================================================================
     
