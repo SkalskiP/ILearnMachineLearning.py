@@ -1,5 +1,19 @@
 import numpy as np
 
+class Tree():
+    
+    def __init__(self, label = None, dimention = None, value = None):
+        # If this node is leaf this field wil hold label of class that is predicted
+        self.label = label
+        # Index of feature that we need to check
+        self.dimention = dimention
+        # Value of featue that we need to chceck
+        self.value = value
+        # Left leaf
+        self.left = None
+        # Right leaf
+        self.right = None
+
 labels = np.array([0, 0, 0, 0, 0, 1, 1, 1, 1, 1])
 classes = np.array([0, 1])
 features = np.array(
@@ -61,7 +75,7 @@ def get_split(features, labels, classes):
     n_features = features.shape[1]
     
     # Best index and best value of gini index
-    b_dim, b_index, b_gini, array_1, array_2 = None, None, None, None, None
+    b_dim, b_index, b_value, b_gini, array_1, array_2 = None, None, None, None, None, None
 
     # Iteration over dimention
     for d in range(0, n_features):
@@ -81,11 +95,11 @@ def get_split(features, labels, classes):
                 b_gini = gini_val
                 b_index = i
                 b_dim = d
+                b_value = features_sorted[i, d]
                 array_1 = spited
                 array_2 = np.split(features_sorted, [i])
             
-    return b_dim, b_index, array_1, array_2
+    return b_gini, b_dim, b_index, b_value, array_1, array_2
         
 print(get_split(features, labels, classes))
 
-        
