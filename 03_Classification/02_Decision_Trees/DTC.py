@@ -1,7 +1,9 @@
 import numpy as np
 
-class Tree():
-    
+class Node():
+    """
+    Supporting class used to build decision tree.
+    """
     def __init__(self, label = None, dimention = None, value = None):
         # If this node is leaf this field wil hold label of class that is predicted
         self.label = label
@@ -13,25 +15,25 @@ class Tree():
         self.left = None
         # Right leaf
         self.right = None
+        
+    def __str__(self):
+        if self.label == None:
+            return("Is value of X" + str(self.dim) + " > then " + str(self.value))
+        else:
+            return("Label: " + str(self.value))
     
 class MyDecisionTreeClassifier():
     """
-    criterion : The function to measure the quality of a split.
-    
     max_depth : The maximum depth of the tree. If None, then nodes are expanded until
                 all leaves are pure or until all leaves contain less than
                 min_samples_split samples.
     
     min_samples_split : The minimum number of samples required to split an internal node.
-    
-    min_samples_leaf : The minimum number of samples required to be at a leaf node.
     """
     def __init__(self, 
-                 criterion="gini", 
                  max_depth = 100, 
                  min_samples_split=2):
         
-        self.criterion = criterion
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
         
@@ -55,8 +57,8 @@ class MyDecisionTreeClassifier():
         self.y = y
 
         # Root of decision tree
-        self.tree_ = Tree()
-        # Building a tree
+        self.tree_ = Node()
+        # Building a tree (fitting data)
         self.split(self.X, self.y, self.tree_, 1)
         
         
@@ -65,42 +67,51 @@ class MyDecisionTreeClassifier():
         Create child splits for a node or make terminal.
         """
         
-        # if set of samples is too small
-        # or node depth is to big
-        #we take as label the most frequent class
+        # If set of samples is too small
+        # Or node depth is to big
+        # We take as label the most frequent class
         if(labels.shape[0] <= self.min_samples_split or depth >= self.max_depth):
             unique, counts = np.unique(labels, return_counts=True)
+            # Finding most frequent class in data set
             node.label = unique[np.argmax(counts)]
             return
         
-        gini_value, split_dim, split_value, spl_labels, spl_features = get_split(features, labels, self.classes_)
-        # Building node children
+        # Finding best split
+        # split_dim : index of feature used in current slit
+        # split_value : limit value in current slit
+        # spl_labels : groups of labels createdafter splitting
+        # spl_features : groups of features createdafter splitting
+        split_dim, split_value, spl_labels, spl_features = get_split(features, labels, self.classes_)
         
-        node.left = Tree()
-        node.right = Tree()
-        """    
-        # Stop growing if split is pure
-        if(gini_value == 0):
-            node.left.label = spl_labels[0][0]
-            node.right.label = spl_labels[1][0]
-            return
-        """  
+        # Building children
+        node.left = Node()
+        node.right = Node()
+ 
+        # Assigning values to node fields
         node.value = split_value
         node.dim = split_dim
         
-        print("Dim: " + str(node.dim) + " and Value: " + str(node.value))
-        
+        # Recursive fitting        
         self.split(spl_features[0], spl_labels[0], node.left, depth+1)
         self.split(spl_features[1], spl_labels[1], node.right, depth+1)
         
     def predict(self, X_test):
+        """
+        Method used for label prediction for multiple samples
+        """
+        # Allocating memory for predictions array
         predictions = np.empty(X_test.shape[0])
+        # Looping over samples in test set
         for index, sample in enumerate(X_test):
             predictions[index] = single_prdict(sample, self.tree_)
     
         return predictions
         
 def single_prdict(features, node):
+    """
+    Function goes through decision tree and finds label value of given set of features.
+    """
+    # Going through decision tree until we find node with defined label.
     while node.label == None:
         if features[node.dim] > node.value:
             node = node.right
@@ -156,7 +167,7 @@ def get_split(features, labels, classes):
     n_features = features.shape[1]
     
     # Best index and best value of gini index
-    b_dim, b_index, b_value, b_gini, array_1, array_2 = None, None, None, None, None, None
+    b_dim, b_value, b_gini, array_1, array_2 = None, None, None, None, None
 
     # Iteration over dimention
     for d in range(0, n_features):
@@ -174,13 +185,12 @@ def get_split(features, labels, classes):
             # Checking if we found better split
             if b_gini == None or gini_val < b_gini:
                 b_gini = gini_val
-                b_index = i
                 b_dim = d
                 b_value = (features_sorted[i, d] + features_sorted[i-1, d])/2
                 array_1 = spited
                 array_2 = np.split(features_sorted, [i])
             
-    return b_gini, b_dim, b_value, array_1, array_2
+    return b_dim, b_value, array_1, array_2
 
 import pandas as pd
 dataset = pd.read_csv('../../00_Datasets/Iris.csv')
