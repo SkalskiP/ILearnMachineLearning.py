@@ -191,7 +191,7 @@ def get_split(features, labels, classes):
                 array_2 = np.split(features_sorted, [i])
             
     return b_dim, b_value, array_1, array_2
-
+"""
 import pandas as pd
 dataset = pd.read_csv('../../00_Datasets/Iris.csv')
 
@@ -258,3 +258,4 @@ plt.ylim(X2.min(), X2.max())
 plt.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap = plt.cm.summer)
 
 plt.show()
+"""
