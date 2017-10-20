@@ -1,4 +1,5 @@
 # My Machine Learning
+In this repository I am collecting my works and projects related to Data Science and Machine Learning. In my scripts I use mainly Python and its dedicated librarys: Pandas, Sci-Kit Learn, Matplotlib, Plotly. I had also used some D3 for data visualizations. I had also used some D3 for visualizations. I also try to make custom implementations of algorithms known from Sci-Kit Learn library.
 
 ## Projects
 
@@ -19,3 +20,9 @@
 * [FIFA 18 Data Exploration and Visualization](https://www.kaggle.com/skalskip/fifa-18-data-exploration-and-d3-js-visualization) - using D3, plotly and seaborn for data visualization.
 
 You can find more of my work related with Machine Learning and data science at my <a href="https://www.kaggle.com/skalskip">Kaggle Profile</a>.
+
+## Prizes and awards
+
+* **Kaggle Kernels Award Winner** (20.10.2017) for my Kaggle project "Using regression to predict GPUs of the future.
+
+<img src="https://github.com/SkalskiP/My_Machine_Learning/blob/master/0_Kaggle_projects/kaggle%20award.png" alt="Kaggle Kernels Award Winner">
