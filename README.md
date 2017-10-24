@@ -1,5 +1,5 @@
 # My Machine Learning
-This repository is a collection of my works and projects related to Data Science and Machine Learning. In my scripts I use mainly Python and its dedicated librarys: Pandas, NumPy, SciPy, Sci-Kit Learn, Matplotlib, Plotly. I had also used some D3 for data visualizations. I also try to make custom implementations of algorithms known from Sci-Kit Learn library.
+This repository is a collection of my works and projects related to Data Science and Machine Learning. In my scripts I use mainly Python and its dedicated librarys: Pandas, NumPy, SciPy, Sci-Kit Learn, Matplotlib, Basemap Plotly. I had also used some D3 for data visualizations. I also try to make custom implementations of algorithms known from Sci-Kit Learn library.
 
 ## Projects
 
