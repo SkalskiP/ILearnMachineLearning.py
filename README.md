@@ -15,9 +15,11 @@ This repository is a collection of my works and projects related to Data Science
   * [Decision Trees](https://github.com/SkalskiP/My_Machine_Learning/tree/master/03_Classification/02_Decision_Trees)
 
 ## Keggle
+For some time, I am also quite active on Kaggle:
 
 * [GPUs Dataset Analysis](https://www.kaggle.com/skalskip/using-regression-to-predict-gpus-of-the-future) - using several kinds of regression to predict technical parameters of GPUs in future.
 * [FIFA 18 Data Exploration and Visualization](https://www.kaggle.com/skalskip/fifa-18-data-exploration-and-d3-js-visualization) - using D3, plotly and seaborn for data visualization.
+* [How big is French Industry?](https://www.kaggle.com/skalskip/how-big-is-french-industry-data-visualization) - deep dive into Kaggle dataset containing information about French industry. The use of libraries such as Plotly and Basemap has allowed me to create truly beautiful visuals.
 
 You can find more of my work related with Machine Learning and data science at my <a href="https://www.kaggle.com/skalskip">Kaggle Profile</a>.
 
