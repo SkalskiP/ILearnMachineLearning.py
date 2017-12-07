@@ -1,1 +1,9 @@
 00_Datasets/French_firms/population.csv
+00_Datasets/Recruit/store_id_relation.csv
+00_Datasets/Recruit/sample_submission.csv
+00_Datasets/Recruit/hpg_store_info.csv
+00_Datasets/Recruit/hpg_reserve.csv
+00_Datasets/Recruit/date_info.csv
+00_Datasets/Recruit/air_visit_data.csv
+00_Datasets/Recruit/air_store_info.csv
+00_Datasets/Recruit/air_reserve.csv
