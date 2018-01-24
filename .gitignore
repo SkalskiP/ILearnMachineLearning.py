@@ -11,3 +11,5 @@ TensorFlow Tutorial/data/MNIST/train-labels-idx1-ubyte.gz
 TensorFlow Tutorial/data/MNIST/train-images-idx3-ubyte.gz
 TensorFlow Tutorial/data/MNIST/t10k-labels-idx1-ubyte.gz
 TensorFlow Tutorial/data/MNIST/t10k-images-idx3-ubyte.gz
+00_Datasets/Fashion_Mnist/fashion-mnist_test.csv
+00_Datasets/Fashion_Mnist/fashion-mnist_train.csv
