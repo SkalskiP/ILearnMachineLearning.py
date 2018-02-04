@@ -28,3 +28,6 @@ You can find more of my work related with Machine Learning and data science at m
 * **Kaggle Kernels Award Winner** (20.10.2017) for my Kaggle project "Using regression to predict GPUs of the future.
 
 <img src="https://github.com/SkalskiP/My_Machine_Learning/blob/master/0_Kaggle_projects/kaggle%20award.png" alt="Kaggle Kernels Award Winner">
+
+## Sources and articles that interested me
+* [What is bias in artificial neural network?](https://www.quora.com/What-is-bias-in-artificial-neural-network)
