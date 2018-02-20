@@ -31,3 +31,4 @@ You can find more of my work related with Machine Learning and data science at m
 
 ## Sources and articles that interested me
 * [What is bias in artificial neural network?](https://www.quora.com/What-is-bias-in-artificial-neural-network)
+* [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
