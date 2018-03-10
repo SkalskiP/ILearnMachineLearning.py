@@ -32,3 +32,4 @@ You can find more of my work related with Machine Learning and data science at m
 ## Sources and articles that interested me
 * [What is bias in artificial neural network?](https://www.quora.com/What-is-bias-in-artificial-neural-network)
 * [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
+* [The 5 Clustering Algorithms Data Scientists Need to Know](https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68)
