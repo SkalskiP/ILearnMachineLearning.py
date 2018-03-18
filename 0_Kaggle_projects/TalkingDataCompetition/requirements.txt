@@ -1,0 +1,16 @@
+certifi==2018.1.18
+cycler==0.10.0
+kaggle==1.0.5
+kiwisolver==1.0.1
+matplotlib==2.2.2
+numpy==1.14.2
+pandas==0.22.0
+pyparsing==2.2.0
+python-dateutil==2.7.0
+pytz==2018.3
+scikit-learn==0.19.1
+scipy==1.0.0
+six==1.11.0
+sklearn==0.0
+urllib3==1.22
+xgboost==0.7.post3
