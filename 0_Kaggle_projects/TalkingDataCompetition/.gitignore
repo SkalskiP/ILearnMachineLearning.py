@@ -1,2 +1,4 @@
 .env/
 input/
+.ipynb_checkpoints/
+__pycach__/
