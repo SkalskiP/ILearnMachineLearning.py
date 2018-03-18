@@ -2,6 +2,9 @@
 # Pranav Kernel: https://www.kaggle.com/pranav84/xgboost-on-hist-mode-ip-addresses-dropped
 # Andy Kernel: https://www.kaggle.com/aharless/jo-o-s-xgboost-with-memory-usage-enhancements
 
+import matplotlib
+matplotlib.use('Agg')
+
 import gc
 import time
 import numpy as np
