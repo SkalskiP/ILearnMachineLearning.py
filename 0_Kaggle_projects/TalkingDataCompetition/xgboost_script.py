@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 # Change this for validation with 10% from train
 is_valid = False
 
-path = '../input/'
+path = './input/'
 
 def timeFeatures(df):
     # Make some new features with click_time column
