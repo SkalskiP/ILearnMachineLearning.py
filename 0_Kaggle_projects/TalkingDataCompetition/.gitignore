@@ -1,4 +1,4 @@
 .env/
 input/
 .ipynb_checkpoints/
-__pycach__/
+__pycache__/
