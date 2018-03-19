@@ -3,6 +3,8 @@ Adding improvements inspired from:
 Ravi Teja's fe script: https://www.kaggle.com/rteja1113/lightgbm-with-count-features?scriptVersionId=2815638
 """
 
+# Score: 0.9671
+
 import pandas as pd
 import time
 import numpy as np

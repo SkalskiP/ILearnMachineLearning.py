@@ -2,6 +2,8 @@
 # Pranav Kernel: https://www.kaggle.com/pranav84/xgboost-on-hist-mode-ip-addresses-dropped
 # Andy Kernel: https://www.kaggle.com/aharless/jo-o-s-xgboost-with-memory-usage-enhancements
 
+# Score: 0.9640
+
 import matplotlib
 matplotlib.use('Agg')
 
