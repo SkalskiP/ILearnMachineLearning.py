@@ -19,7 +19,7 @@ import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 import os
-os.environ['OMP_NUM_THREADS'] = '1'
+os.environ['OMP_NUM_THREADS'] = '8'
 import gc
 
 path = '../input/'
