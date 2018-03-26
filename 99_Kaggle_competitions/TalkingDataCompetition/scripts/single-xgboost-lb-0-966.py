@@ -122,10 +122,6 @@ gc.collect()
 
 print('[{}] Finish XGBoost Training'.format(time.time() - start_time))
 
-# Plot the feature importance from xgboost
-plot_importance(model)
-plt.gcf().savefig('feature_importance_xgb.png')
-
 # Load the test for predict 
 test = pd.read_csv(path+"test.csv", usecols=test_columns, dtype=dtypes)
 test = pd.merge(test, ip_count, on='ip', how='left', sort=False)
