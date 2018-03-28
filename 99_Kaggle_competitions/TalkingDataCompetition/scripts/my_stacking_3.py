@@ -11,7 +11,7 @@ models = {
   'lgb  ':  "../output/submission.csv",
   'nn2  ':  "../output/imbalanced_data.csv",
   'rlgb1':  "../output/sub_lightgbm_R_75m.csv",
-  'rlgb2':  "../output/sub_lightgbm_R_185m.csv
+  'rlgb2':  "../output/sub_lightgbm_R_185m.csv"
 
   }
   
