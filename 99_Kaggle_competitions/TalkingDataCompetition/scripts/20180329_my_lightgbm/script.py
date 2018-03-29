@@ -71,7 +71,7 @@ def prep_data( df ):
     gp = df[['ip', 'day', 'hour', 'device', 'channel']].groupby(by=['ip', 'day',
              'hour', 'device'])[['channel']].count().reset_index().rename(index=str, 
              columns={'channel': 'ip_day_hour_div'})
-    df = df.merge(gp, on=['ip','day','hour','div'], how='left')
+    df = df.merge(gp, on=['ip','day','hour','device'], how='left')
     df['ip_day_hour_div'] = df['ip_day_hour_div'].astype('uint32')
     print( "ip_day_hour_div max val = ", df.ip_day_hour_div.max() )
     del gp
