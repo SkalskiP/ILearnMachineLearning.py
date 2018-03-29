@@ -1,4 +1,4 @@
-VALIDATE = False
+VALIDATE = True
 
 MAX_ROUNDS = 1000
 EARLY_STOP = 50
@@ -27,8 +27,8 @@ dtypes = {
 
 print('load train...')
 train_cols = ['ip','app','device','os', 'channel', 'click_time', 'is_attributed']
-train_df = pd.read_csv(path+"train.csv", skiprows=range(1,179903891), nrows=5000000,dtype=dtypes, usecols=train_cols)
-# train_df = pd.read_csv(path+"train.csv", skiprows=range(1,109903891), nrows=75000000,dtype=dtypes, usecols=train_cols)
+# train_df = pd.read_csv(path+"train.csv", skiprows=range(1,179903891), nrows=5000000,dtype=dtypes, usecols=train_cols)
+train_df = pd.read_csv(path+"train.csv", skiprows=range(1,109903891), nrows=75000000,dtype=dtypes, usecols=train_cols)
 
 import gc
 
