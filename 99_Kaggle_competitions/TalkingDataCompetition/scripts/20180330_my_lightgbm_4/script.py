@@ -30,6 +30,7 @@ dtypes = {
 # Columns names
 train_cols = ['ip','app','device','os', 'channel', 'click_time', 'is_attributed']
 test_cols = ['ip','app','device','os', 'channel', 'click_time', 'click_id']
+
 target = 'is_attributed'
 predictors = ['app','device','os', 'channel', 'hour', 'nip_day_test_hh', 'nip_day_hh', 'nip_hh_os', 'nip_hh_app', 'nip_hh_dev']
 categorical = ['app', 'device', 'os', 'channel', 'hour']
@@ -150,8 +151,8 @@ def prep_data( df ):
 print('Load test set...')
 test_df = pd.read_csv(path+"test.csv", dtype=dtypes, usecols=test_cols)
 print('Load train set...')
-train_df = pd.read_csv(path+"train.csv", dtype=dtypes, usecols=train_cols)
-train_df = filtrationByDateTrain(train_df)
+train_df_pre = pd.read_csv(path+"train.csv", dtype=dtypes, usecols=train_cols)
+train_df = filtrationByDateTrain(train_df_pre)
 gc.collect()
 
 print( "Train info before: ")
@@ -189,7 +190,7 @@ lgb_params = {
 print(train_df.head(5))
 
 print('Load valid set...')
-val_df = filtrationByDateValid(test_df)
+val_df = filtrationByDateValid(test_df_pre)
 val_df = prep_data( val_df )
 gc.collect()
 
