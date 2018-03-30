@@ -189,7 +189,7 @@ lgb_params = {
 print(train_df.head(5))
 
 print('Load valid set...')
-val_df = filtrationByDateValid(train_df)
+val_df = filtrationByDateValid(test_df)
 val_df = prep_data( val_df )
 gc.collect()
 
