@@ -35,14 +35,14 @@ import lightgbm as lgb
 path = '../../input/'
 
 dtypes = {
-        'ip'            : 'uint32',
-        'app'           : 'uint16',
-        'device'        : 'uint16',
-        'os'            : 'uint16',
-        'channel'       : 'uint16',
-        'is_attributed' : 'uint8',
-        'click_id'      : 'uint32'
-        }
+    'ip'            : 'uint32',
+    'app'           : 'uint16',
+    'device'        : 'uint16',
+    'os'            : 'uint16',
+    'channel'       : 'uint16',
+    'is_attributed' : 'uint8',
+    'click_id'      : 'uint32'
+}
 
 print('load train...')
 train_cols = ['ip','app','device','os', 'channel', 'click_time', 'is_attributed']
