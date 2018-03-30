@@ -61,8 +61,7 @@ def filtrationByDateTrain(df):
 def filtrationByDateTest(df):
     print("Converting to datetime...")
     df['click_time'] = pd.to_datetime(df['click_time'])
-    print("Filtration of dataset...")
-    return df[(df['click_time'] <= test_end_date) & (df['click_time'] >= valid_end_date)]
+    
 
 def filtrationByDateValid(df):
     print("Converting to datetime...")
@@ -192,6 +191,7 @@ print(train_df.head(5))
 print('Load valid set...')
 val_df = filtrationByDateValid(test_df_pre)
 val_df = prep_data( val_df )
+del test_df_pre
 gc.collect()
 
 print(train_df.info())
