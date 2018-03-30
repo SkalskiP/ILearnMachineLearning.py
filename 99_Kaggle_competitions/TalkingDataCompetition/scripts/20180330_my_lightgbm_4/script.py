@@ -61,6 +61,7 @@ def filtrationByDateTrain(df):
 def filtrationByDateTest(df):
     print("Converting to datetime...")
     df['click_time'] = pd.to_datetime(df['click_time'])
+    return df
     
 
 def filtrationByDateValid(df):
