@@ -237,7 +237,6 @@ print('Load valid set...')
 val_df = pd.read_csv(path+"train.csv", dtype=dtypes, usecols=train_cols)
 val_df = filtrationByDateValid(val_df)
 val_df = prep_data( val_df )
-del train_df_pre
 gc.collect()
 
 print(train_df.info())
