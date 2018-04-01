@@ -61,7 +61,7 @@ valid_end_date = "2017-11-09 16:00:00"
 train_start_date = datetime.strptime(train_start_date, '%Y-%m-%d %H:%M:%S')
 train_end_date = datetime.strptime(train_end_date, '%Y-%m-%d %H:%M:%S')
 valid_start_date = datetime.strptime(valid_start_date, '%Y-%m-%d %H:%M:%S')
-valid_end_date = datetime.strptime(valid_end_date '%Y-%m-%d %H:%M:%S')
+valid_end_date = datetime.strptime(valid_end_date, '%Y-%m-%d %H:%M:%S')
 
 # Filtration by date
 def filtrationByDateTrain(df):
