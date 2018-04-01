@@ -64,15 +64,15 @@ valid_start_date = datetime.strptime(valid_start_date, '%Y-%m-%d %H:%M:%S')
 valid_end_date = datetime.strptime(valid_end_date, '%Y-%m-%d %H:%M:%S')
 
 # Filtration by date
-def filtrationByDateTrain(df_in):
+def filtrationByDateTrain(df):
     print("Converting to datetime...")
-    df['click_time'] = pd.to_datetime(df_in['click_time'])
+    df['click_time'] = pd.to_datetime(df['click_time'])
     print("Filtration of dataset...")
     return df[(df['click_time'] <= train_end_date) & (df['click_time'] > train_start_date)]
 
-def filtrationByDateValid(df_in):
+def filtrationByDateValid(df):
     print("Converting to datetime...")
-    df['click_time'] = pd.to_datetime(df_in['click_time'])
+    df['click_time'] = pd.to_datetime(df['click_time'])
     print("Filtration of dataset...")
     return df[(df['click_time'] <= valid_end_date) & (df['click_time'] > valid_start_date)]
 
@@ -193,12 +193,10 @@ def prep_data( df ):
 
 #---------------------------------------------------------------------------------
 
-print('Load test set...')
-test_df = pd.read_csv(path+"test.csv", dtype=dtypes, usecols=test_cols)
 print('Load train set...')
-train_df_pre = pd.read_csv(path+"train.csv", dtype=dtypes, usecols=train_cols)
+train_df = pd.read_csv(path+"train.csv", dtype=dtypes, usecols=train_cols)
 
-train_df = filtrationByDateTrain(train_df_pre)
+train_df = filtrationByDateTrain(train_df)
 gc.collect()
 
 print( "Train info before: ")
@@ -236,6 +234,7 @@ lgb_params = {
 print(train_df.head(5))
 
 print('Load valid set...')
+val_df = pd.read_csv(path+"train.csv", dtype=dtypes, usecols=train_cols)
 val_df = filtrationByDateValid(train_df_pre)
 val_df = prep_data( val_df )
 del train_df_pre
@@ -291,6 +290,7 @@ del xgtrain
 gc.collect()
 
 print('Load test set...')
+test_df = pd.read_csv(path+"test.csv", dtype=dtypes, usecols=test_cols)
 test_df = filtrationByDateTest(test_df)
 test_df = prep_data( test_df )
 gc.collect()
