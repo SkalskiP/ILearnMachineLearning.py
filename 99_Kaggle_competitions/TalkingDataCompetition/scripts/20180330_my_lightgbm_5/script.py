@@ -289,7 +289,8 @@ gc.collect()
 
 print('Load test set...')
 test_df = pd.read_csv(path+"test.csv", dtype=dtypes, usecols=test_cols)
-test_df = filtrationByDateTest(test_df)
+print("Converting to datetime...")
+test_df['click_time'] = pd.to_datetime(test_df['click_time'])
 test_df = prep_data( test_df )
 gc.collect()
 
