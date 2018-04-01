@@ -5,6 +5,8 @@ import numpy as np
 from sklearn.model_selection import train_test_split 
 import lightgbm as lgb
 from datetime import datetime
+import time
+start = time.time()
 
 # Constants and general settings
 MAX_ROUNDS = 1000
@@ -193,6 +195,7 @@ def prep_data( df ):
 #---------------------------------------------------------------------------------
 
 print('Load train set...')
+print('%.2f seconds' % (time.time()-start))
 train_df = pd.read_csv(path+"train.csv", dtype=dtypes, usecols=train_cols)
 
 train_df = filtrationByDateTrain(train_df)
@@ -200,6 +203,7 @@ gc.collect()
 
 print( "Train info before: ")
 print( train_df.info() )
+print('%.2f seconds' % (time.time()-start))
 train_df = prep_data( train_df )
 gc.collect()
 
@@ -233,8 +237,10 @@ lgb_params = {
 print(train_df.head(5))
 
 print('Load valid set...')
+print('%.2f seconds' % (time.time()-start))
 val_df = pd.read_csv(path+"train.csv", dtype=dtypes, usecols=train_cols)
 val_df = filtrationByDateValid(val_df)
+print('%.2f seconds' % (time.time()-start))
 val_df = prep_data( val_df )
 gc.collect()
 
@@ -247,7 +253,7 @@ print("valid size: ", len(val_df))
 gc.collect()
 
 print("Training...")
-
+print('%.2f seconds' % (time.time()-start))
 num_boost_round=MAX_ROUNDS
 early_stopping_rounds=EARLY_STOP
 
@@ -288,6 +294,7 @@ del xgtrain
 gc.collect()
 
 print('Load test set...')
+print('%.2f seconds' % (time.time()-start))
 test_df = pd.read_csv(path+"test.csv", dtype=dtypes, usecols=test_cols)
 print("Converting to datetime...")
 test_df['click_time'] = pd.to_datetime(test_df['click_time'])
@@ -305,4 +312,5 @@ print(bst.feature_importance())
 print("writing...")
 sub.to_csv(outfile, index=False, float_format='%.9f')
 print("done...")
+print('%.2f seconds' % (time.time()-start))
 print(sub.info())
