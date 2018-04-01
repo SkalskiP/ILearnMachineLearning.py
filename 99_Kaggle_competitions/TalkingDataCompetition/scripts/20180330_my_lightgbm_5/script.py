@@ -12,8 +12,7 @@ EARLY_STOP = 50
 OPT_ROUNDS = 680
 
 # Paths and file names settings
-FULL_OUTFILE = 'sub_lgbm_r_to_python_nocv.csv'
-VALID_OUTFILE = 'sub_lgbm_r_to_python_withcv.csv'
+outfile = 'sub_lgbm_r_to_python_withcv.csv'
 path = '../../input/'
 
 # Columns types
@@ -47,7 +46,8 @@ predictors = ['app',
               'ip_min',
               'ip_min_app',
               'ip_min_os',
-              'ip_min_dev']
+              'ip_min_dev',
+              'ip_sec']
 
 categorical = ['app', 'device', 'os', 'channel', 'hour']
 
@@ -64,17 +64,17 @@ valid_start_date = datetime.strptime(valid_start_date, '%Y-%m-%d %H:%M:%S')
 valid_end_date = datetime.strptime(valid_end_date, '%Y-%m-%d %H:%M:%S')
 
 # Filtration by date
-def filtrationByDateTrain(df):
+def filtrationByDateTrain(df_in):
     print("Converting to datetime...")
-    df['click_time'] = pd.to_datetime(df['click_time'])
+    df['click_time'] = pd.to_datetime(df_in['click_time'])
     print("Filtration of dataset...")
     return df[(df['click_time'] <= train_end_date) & (df['click_time'] > train_start_date)]
 
-def filtrationByDateValid(df):
+def filtrationByDateValid(df_in):
     print("Converting to datetime...")
-    df['click_time'] = pd.to_datetime(df['click_time'])
+    df['click_time'] = pd.to_datetime(df_in['click_time'])
     print("Filtration of dataset...")
-    return df[(df['click_time'] <= valid_end_date) & (df['click_time'] > test_start_date)]
+    return df[(df['click_time'] <= valid_end_date) & (df['click_time'] > valid_start_date)]
 
 def prep_data( df ):
     print('Prep data...')
@@ -285,8 +285,6 @@ n_estimators = bst.best_iteration
 print("\nModel Report")
 print("n_estimators : ", n_estimators)
 print(metrics+":", evals_results['valid'][metrics][n_estimators-1])
-
-outfile = VALID_OUTFILE
 
 del xgvalid
 del xgtrain
