@@ -9,17 +9,18 @@ almost_one = 1 - almost_zero
 
 models = {
   'xgb  ':  "../../output/sub_xgb_hist_R_50m.csv",
-  """'nn   ':  "../201803301_deep_learning_support_imbalance_architect_9674/imbalanced_data.csv","""
   'lgb  ':  "../20180330_try_pranav_s_r_lgbm_in_python/sub_lgbm_r_to_python_withcv.csv",
   'lgb2 ':  "../20180330_my_lightgbm_6/sub_lgbm_r_to_python_withcv.csv"
   }
   
 weights = {
-  'xgb  ':  .25,    #0.9686
-  """'nn   ':  .15,    #0.9662"""
-  'lgb  ':  .60,    #0.9694
-  'lgb2 ':  .15     #0.9684
+  'xgb  ':  .25,    
+  'lgb  ':  .60,    
+  'lgb2 ':  .15     
   }
+#0.9686
+#0.9694
+#0.9684
   
 print (sum(weights.values()))
 
