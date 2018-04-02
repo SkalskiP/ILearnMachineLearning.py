@@ -215,7 +215,7 @@ train_df.info()
 
 metrics = 'auc'
 lgb_params = {
-    'boosting_type': 'auc',
+    'boosting_type': 'gbdt',
     'objective': 'binary',
     'metric':metrics,
     'learning_rate': 0.1,
