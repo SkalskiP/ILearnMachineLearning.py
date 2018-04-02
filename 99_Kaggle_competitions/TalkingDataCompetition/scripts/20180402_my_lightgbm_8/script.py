@@ -287,7 +287,7 @@ train_df.info()
 metrics = 'auc'
 lgb_params = {
     'boosting_type': 'gbdt',
-    'objective': 'binary',
+    'objective': 'binary', # this is classification problem, two classes
     'metric':metrics,
     'learning_rate': 0.1,
     'num_leaves': 9,  # we should let it be smaller than 2^(max_depth)
