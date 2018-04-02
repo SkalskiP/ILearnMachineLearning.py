@@ -252,30 +252,30 @@ gc.collect()
 
 # Mean and standard deviation for hour agregation
 
-train_ip_hr_mean = df_train.ip_hr.mean()
-train_ip_hr_std = df_train.ip_hr.std()
-train_ip_hr_app_mean = df_train.ip_hr_app.mean()
-train_ip_hr_app_std = df_train.ip_hr_app.std()
-train_ip_hr_os_mean = df_train.ip_hr_os.mean()
-train_ip_hr_os_std = df_train.ip_hr_os.std()
-train_ip_hr_dev_mean = df_train.ip_hr_dev.mean()
-train_ip_hr_dev_std = df_train.ip_hr_dev.std()
+train_ip_hr_mean = train_df.ip_hr.mean()
+train_ip_hr_std = train_df.ip_hr.std()
+train_ip_hr_app_mean = train_df.ip_hr_app.mean()
+train_ip_hr_app_std = train_df.ip_hr_app.std()
+train_ip_hr_os_mean = train_df.ip_hr_os.mean()
+train_ip_hr_os_std = train_df.ip_hr_os.std()
+train_ip_hr_dev_mean = train_df.ip_hr_dev.mean()
+train_ip_hr_dev_std = train_df.ip_hr_dev.std()
 
 # Mean and standard deviation for minute agregation
 
-train_ip_min_mean = df_train.ip_min.mean()
-train_ip_min_std = df_train.ip_min.std()
-train_ip_min_app_mean = df_train.ip_min_app.mean()
-train_ip_min_app_std = df_train.ip_min_app.std()
-train_ip_min_os_mean = df_train.ip_min_os.mean()
-train_ip_min_os_std = df_train.ip_min_os.std()
-train_ip_min_dev_mean = df_train.ip_min_dev.mean()
-train_ip_min_dev_std = df_train.ip_min_dev.std()
+train_ip_min_mean = train_df.ip_min.mean()
+train_ip_min_std = train_df.ip_min.std()
+train_ip_min_app_mean = train_df.ip_min_app.mean()
+train_ip_min_app_std = train_df.ip_min_app.std()
+train_ip_min_os_mean = train_df.ip_min_os.mean()
+train_ip_min_os_std = train_df.ip_min_os.std()
+train_ip_min_dev_mean = train_df.ip_min_dev.mean()
+train_ip_min_dev_std = train_df.ip_min_dev.std()
 
 # Mean and standard deviation for second agregation
 
-train_ip_sec_mean = df_train.ip_sec.mean()
-train_ip_sec_std = df_train.ip_sec.std()
+train_ip_sec_mean = train_df.ip_sec.mean()
+train_ip_sec_std = train_df.ip_sec.std()
 
 train_df = data_normalization( train_df )
 gc.collect()
