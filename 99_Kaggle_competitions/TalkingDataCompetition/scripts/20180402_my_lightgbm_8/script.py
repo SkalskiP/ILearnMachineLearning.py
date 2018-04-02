@@ -75,7 +75,7 @@ def filtrationByDateTrain(df):
     print("Converting to datetime...")
     df['click_time'] = pd.to_datetime(df['click_time'])
     print("Filtration of dataset...")
-    return df[(df['click_time'] <= train_end_date)]
+    return df[(df['click_time'] <= train_end_date) & (df['click_time'] > train_start_date)]
 
 #---------------------------------------------------------------------------------
 
