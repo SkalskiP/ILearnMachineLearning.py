@@ -231,8 +231,6 @@ def data_normalization( df ):
     df['ip_sec'] = (df['ip_sec'] - train_ip_sec_mean)/train_ip_sec_std
     gc.collect()
     
-    df.drop( ['ip','day', 'minute', 'second'], axis=1, inplace=True )
-    gc.collect()
     print( df.info() )
     
     return( df )
