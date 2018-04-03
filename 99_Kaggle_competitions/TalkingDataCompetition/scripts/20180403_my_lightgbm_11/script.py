@@ -50,11 +50,8 @@ predictors = ['app',
               'ip_min',
               'ip_min_app',
               'ip_min_os',
-              'ip_blacklist',
               'ip_blacklist_sum',
-              'os_blacklist',
               'os_blacklist_sum',
-              'dev_blacklist',
               'dev_blacklist_sum'
             ]
 
