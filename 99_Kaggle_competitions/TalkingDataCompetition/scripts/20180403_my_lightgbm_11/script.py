@@ -249,7 +249,7 @@ gc.collect()
 print('Build IP Blacklist...')
 
 gp_ip_blacklist = train_df[['ip', 'is_attributed']].groupby(by=['ip'])['is_attributed'].agg(['sum','count']).reset_index()
-gp_ip_blacklist['ip_blacklist'] = gp_ip_blacklist['sum']/gp_ip_blacklist['count']
+#gp_ip_blacklist['ip_blacklist'] = gp_ip_blacklist['sum']/gp_ip_blacklist['count']
 gp_ip_blacklist['ip_blacklist_sum'] = gp_ip_blacklist['sum'] 
 gp_ip_blacklist.drop(['sum','count'], axis=1, inplace=True)
 gc.collect()
@@ -260,7 +260,7 @@ gc.collect()
 print('Build OS Blacklist...')
 
 gp_os_blacklist = train_df[['os', 'is_attributed']].groupby(by=['os'])['is_attributed'].agg(['sum','count']).reset_index()
-gp_os_blacklist['os_blacklist'] = gp_os_blacklist['sum']/gp_os_blacklist['count']
+#gp_os_blacklist['os_blacklist'] = gp_os_blacklist['sum']/gp_os_blacklist['count']
 gp_os_blacklist['os_blacklist_sum'] = gp_os_blacklist['sum']
 gp_os_blacklist.drop(['sum','count'], axis=1, inplace=True)
 gc.collect()
@@ -270,7 +270,7 @@ gc.collect()
 print('Build Device Blacklist...')
 
 gp_dev_blacklist = train_df[['device', 'is_attributed']].groupby(by=['device'])['is_attributed'].agg(['sum','count']).reset_index()
-gp_dev_blacklist['dev_blacklist'] = gp_dev_blacklist['sum']/gp_dev_blacklist['count']
+#gp_dev_blacklist['dev_blacklist'] = gp_dev_blacklist['sum']/gp_dev_blacklist['count']
 gp_dev_blacklist['dev_blacklist_sum'] = gp_dev_blacklist['sum']
 gp_dev_blacklist.drop(['sum','count'], axis=1, inplace=True)
 gc.collect()
@@ -295,7 +295,7 @@ lgb_params = {
     'objective': 'binary',
     'metric':metrics,
     'learning_rate': 0.1,
-    'num_leaves': 16,  # we should let it be smaller than 2^(max_depth)
+    'num_leaves': 12,  # we should let it be smaller than 2^(max_depth)
     'max_depth': 6,  # -1 means no limit
     'min_child_samples': 100,  # Minimum number of data need in a child(min_data_in_leaf)
     'max_bin': 100,  # Number of bucketed bin for feature values
@@ -329,17 +329,20 @@ gc.collect()
 print('Apply IP Blacklist...')
 
 val_df = val_df.merge(gp_ip_blacklist, on=['ip'], how='left')
-val_df['ip_blacklist'] = val_df['ip_blacklist'].fillna(0.0)
+#val_df['ip_blacklist'] = val_df['ip_blacklist'].fillna(0.0)
+val_df['ip_blacklist_sum'] = val_df['ip_blacklist_sum'].fillna(0)
 val_df.drop( ['ip'], axis=1, inplace=True )
 gc.collect()
 
 print('Apply OS Blacklist...')
 val_df = val_df.merge(gp_os_blacklist, on=['os'], how='left')
-val_df['os_blacklist'] = val_df['os_blacklist'].fillna(0.0)
+#val_df['os_blacklist'] = val_df['os_blacklist'].fillna(0.0)
+val_df['os_blacklist_sum'] = val_df['os_blacklist_sum'].fillna(0)
 
 print('Apply Device Blacklist...')
 val_df = val_df.merge(gp_dev_blacklist, on=['device'], how='left')
-val_df['dev_blacklist'] = val_df['dev_blacklist'].fillna(0.0)
+#val_df['dev_blacklist'] = val_df['dev_blacklist'].fillna(0.0)
+val_df['dev_blacklist_sum'] = val_df['dev_blacklist_sum'].fillna(0)
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
@@ -408,17 +411,20 @@ gc.collect()
 print('Apply IP Blacklist...')
 
 test_df = test_df.merge(gp_ip_blacklist, on=['ip'], how='left')
-test_df['ip_blacklist'] = test_df['ip_blacklist'].fillna(0.0)
+#test_df['ip_blacklist'] = test_df['ip_blacklist'].fillna(0.0)
+test_df['ip_blacklist_sum'] = test_df['ip_blacklist_sum'].fillna(0)
 test_df.drop( ['ip'], axis=1, inplace=True )
 gc.collect()
 
 print('Apply OS Blacklist...')
 test_df = test_df.merge(gp_os_blacklist, on=['os'], how='left')
-test_df['os_blacklist'] = test_df['os_blacklist'].fillna(0.0)
+#test_df['os_blacklist'] = test_df['os_blacklist'].fillna(0.0)
+test_df['os_blacklist_sum'] = test_df['os_blacklist_sum'].fillna(0)
 
 print('Apply Device Blacklist...')
 test_df = test_df.merge(gp_dev_blacklist, on=['device'], how='left')
-test_df['dev_blacklist'] = test_df['dev_blacklist'].fillna(0.0)
+#test_df['dev_blacklist'] = test_df['dev_blacklist'].fillna(0.0)
+test_df['dev_blacklist_sum'] = test_df['dev_blacklist_sum'].fillna(0)
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
