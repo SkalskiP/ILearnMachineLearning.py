@@ -45,7 +45,9 @@ predictors = ['app',
               'hour',
               'ip_hr',
               'ip_hr_app',
-              'ip_blacklist'
+              'ip_blacklist',
+              'os_blacklist',
+              'dev_blacklist'
             ]
 
 categorical = ['app', 'device', 'os', 'channel', 'hour']
@@ -219,6 +221,24 @@ train_df = train_df.merge(gp_ip_blacklist, on=['ip'], how='left')
 train_df.drop( ['ip'], axis=1, inplace=True )
 gc.collect()
 
+print('Build OS Blacklist...')
+
+gp_os_blacklist = train_df[['os', 'is_attributed']].groupby(by=['os'])['is_attributed'].agg(['sum','count']).reset_index()
+gp_os_blacklist['os_blacklist'] = gp_os_blacklist['sum']/gp_os_blacklist['count']
+gp_os_blacklist.drop(['sum','count'], axis=1, inplace=True)
+gc.collect()
+train_df = train_df.merge(gp_os_blacklist, on=['os'], how='left')
+gc.collect()
+
+print('Build Device Blacklist...')
+
+gp_dev_blacklist = train_df[['device', 'is_attributed']].groupby(by=['device'])['is_attributed'].agg(['sum','count']).reset_index()
+gp_dev_blacklist['dev_blacklist'] = gp_dev_blacklist['sum']/gp_dev_blacklist['count']
+gp_dev_blacklist.drop(['sum','count'], axis=1, inplace=True)
+gc.collect()
+train_df = train_df.merge(gp_dev_blacklist, on=['device'], how='left')
+gc.collect()
+
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
 print( "Train info after: ")
@@ -275,7 +295,17 @@ val_df['ip_blacklist'] = val_df['ip_blacklist'].fillna(0.0)
 val_df.drop( ['ip'], axis=1, inplace=True )
 gc.collect()
 
+print('Apply OS Blacklist...')
+val_df = val_df.merge(gp_os_blacklist, on=['os'], how='left')
+val_df['os_blacklist'] = val_df['os_blacklist'].fillna(0.0)
+
+print('Apply Device Blacklist...')
+val_df = val_df.merge(gp_dev_blacklist, on=['device'], how='left')
+val_df['dev_blacklist'] = val_df['dev_blacklist'].fillna(0.0)
+
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+print(val_df.head(5))
 
 print( "Valid info after: ")
 print(val_df.info())
@@ -344,7 +374,17 @@ test_df['ip_blacklist'] = test_df['ip_blacklist'].fillna(0.0)
 test_df.drop( ['ip'], axis=1, inplace=True )
 gc.collect()
 
+print('Apply OS Blacklist...')
+test_df = test_df.merge(gp_os_blacklist, on=['os'], how='left')
+test_df['os_blacklist'] = test_df['os_blacklist'].fillna(0.0)
+
+print('Apply Device Blacklist...')
+test_df = test_df.merge(gp_dev_blacklist, on=['device'], how='left')
+test_df['dev_blacklist'] = test_df['dev_blacklist'].fillna(0.0)
+
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+print(test_df.head(5))
 
 sub = pd.DataFrame()
 sub['click_id'] = test_df['click_id']
