@@ -54,12 +54,10 @@ categorical = ['app', 'device', 'os', 'channel', 'hour']
 
 
 # Limit dates for the training and test set
-train_start_date = "2017-11-08 00:00:00"
 train_end_date = "2017-11-08 23:59:59"
-valid_start_date = "2017-11-09 04:00:00"
-valid_end_date = "2017-11-09 16:00:00"
+valid_start_date = "2017-11-09 00:00:00"
+valid_end_date = "2017-11-09 23:59:59"
 
-train_start_date = datetime.strptime(train_start_date, '%Y-%m-%d %H:%M:%S')
 train_end_date = datetime.strptime(train_end_date, '%Y-%m-%d %H:%M:%S')
 valid_start_date = datetime.strptime(valid_start_date, '%Y-%m-%d %H:%M:%S')
 valid_end_date = datetime.strptime(valid_end_date, '%Y-%m-%d %H:%M:%S')
@@ -69,7 +67,7 @@ def filtrationByDateTrain(df):
     print("Converting to datetime...")
     df['click_time'] = pd.to_datetime(df['click_time'])
     print("Filtration of dataset...")
-    return df[(df['click_time'] <= train_end_date) & (df['click_time'] > train_start_date)]
+    return df[(df['click_time'] <= train_end_date)]
 
 #---------------------------------------------------------------------------------
 
@@ -257,8 +255,8 @@ lgb_params = {
     'objective': 'binary',
     'metric':metrics,
     'learning_rate': 0.1,
-    'num_leaves': 9,  # we should let it be smaller than 2^(max_depth)
-    'max_depth': 5,  # -1 means no limit
+    'num_leaves': 16,  # we should let it be smaller than 2^(max_depth)
+    'max_depth': 6,  # -1 means no limit
     'min_child_samples': 100,  # Minimum number of data need in a child(min_data_in_leaf)
     'max_bin': 100,  # Number of bucketed bin for feature values
     'subsample': 0.9,  # Subsample ratio of the training instance.
