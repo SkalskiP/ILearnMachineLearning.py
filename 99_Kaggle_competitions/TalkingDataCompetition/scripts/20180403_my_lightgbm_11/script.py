@@ -122,6 +122,7 @@ def prep_data( df ):
     print("Extract day and hour from datetime...")
     df['hour'] = df['click_time'].dt.hour.astype('uint8')
     df['day'] = df['click_time'].dt.dayofyear.astype('uint8')
+    df['minute'] = df['click_time'].dt.minute.astype('uint8')
     df.drop(['click_time'], axis=1, inplace=True)
     gc.collect()
     
@@ -223,7 +224,7 @@ def prep_data( df ):
     
     print( df.info() )
 
-    df.drop( ['day'], axis=1, inplace=True )
+    df.drop( ['day', 'minute'], axis=1, inplace=True )
     gc.collect()
     print( df.info() )
     
