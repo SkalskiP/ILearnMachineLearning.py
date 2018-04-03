@@ -15,7 +15,7 @@ import time
 start = time.time()
 
 # Constants and general settings
-MAX_ROUNDS = 1000
+MAX_ROUNDS = 1500
 EARLY_STOP = 50
 OPT_ROUNDS = 680
 
@@ -50,20 +50,16 @@ predictors = ['app',
               'ip_hr_dev',
               'ip_min',
               'ip_min_app',
-              'ip_min_os',
-              'ip_min_dev',
-              'ip_sec']
+              'ip_min_os']
 
 categorical = ['app', 'device', 'os', 'channel', 'hour']
 
 
 # Limit dates for the training and test set
-train_start_date = "2017-11-08 00:00:00"
 train_end_date = "2017-11-08 23:59:59"
-valid_start_date = "2017-11-09 04:00:00"
-valid_end_date = "2017-11-09 16:00:00"
+valid_start_date = "2017-11-09 00:00:00"
+valid_end_date = "2017-11-09 23:59:59"
 
-train_start_date = datetime.strptime(train_start_date, '%Y-%m-%d %H:%M:%S')
 train_end_date = datetime.strptime(train_end_date, '%Y-%m-%d %H:%M:%S')
 valid_start_date = datetime.strptime(valid_start_date, '%Y-%m-%d %H:%M:%S')
 valid_end_date = datetime.strptime(valid_end_date, '%Y-%m-%d %H:%M:%S')
@@ -73,7 +69,7 @@ def filtrationByDateTrain(df):
     print("Converting to datetime...")
     df['click_time'] = pd.to_datetime(df['click_time'])
     print("Filtration of dataset...")
-    return df[(df['click_time'] <= train_end_date) & (df['click_time'] > train_start_date)]
+    return df[(df['click_time'] <= train_end_date)]
 
 #---------------------------------------------------------------------------------
 
@@ -170,27 +166,27 @@ def prep_data( df ):
     del gp
     gc.collect()
     
-    print("Group by ip, day, hour, minute, device...")
-    gp = df[['ip', 'day', 'hour', 'minute', 'device', 'channel']].groupby(by=['ip', 'day',
-             'hour', 'minute', 'device'])[['channel']].count().reset_index().rename(index=str, 
-             columns={'channel': 'ip_min_dev'})
-    df = df.merge(gp, on=['ip','day','hour','minute','device'], how='left')
-    df['ip_min_dev'] = df['ip_min_dev'].astype('uint32')
-    print( "ip_min_dev max val = ", df.ip_min_dev.max() )
-    del gp
-    gc.collect()
+    # print("Group by ip, day, hour, minute, device...")
+    # gp = df[['ip', 'day', 'hour', 'minute', 'device', 'channel']].groupby(by=['ip', 'day',
+    #          'hour', 'minute', 'device'])[['channel']].count().reset_index().rename(index=str, 
+    #          columns={'channel': 'ip_min_dev'})
+    # df = df.merge(gp, on=['ip','day','hour','minute','device'], how='left')
+    # df['ip_min_dev'] = df['ip_min_dev'].astype('uint32')
+    # print( "ip_min_dev max val = ", df.ip_min_dev.max() )
+    # del gp
+    # gc.collect()
     
-    print("Aggregation of features inside second...")
+    # print("Aggregation of features inside second...")
     
-    print("Group by ip, day, hour, minute, second...")
-    gp = df[['ip', 'day', 'hour', 'minute', 'second', 'channel']].groupby(by=['ip', 'day',
-             'hour','minute', 'second'])[['channel']].count().reset_index().rename(index=str, 
-             columns={'channel': 'ip_sec'})
-    df = df.merge(gp, on=['ip','day','hour', 'minute', 'second'], how='left')
-    df['ip_sec'] = df['ip_sec'].astype('uint32')
-    print( "ip_sec max val = ", df.ip_sec.max() )
-    del gp
-    gc.collect()
+    # print("Group by ip, day, hour, minute, second...")
+    # gp = df[['ip', 'day', 'hour', 'minute', 'second', 'channel']].groupby(by=['ip', 'day',
+    #          'hour','minute', 'second'])[['channel']].count().reset_index().rename(index=str, 
+    #          columns={'channel': 'ip_sec'})
+    # df = df.merge(gp, on=['ip','day','hour', 'minute', 'second'], how='left')
+    # df['ip_sec'] = df['ip_sec'].astype('uint32')
+    # print( "ip_sec max val = ", df.ip_sec.max() )
+    # del gp
+    # gc.collect()
     
     print( df.info() )
 
@@ -289,7 +285,7 @@ lgb_params = {
     'boosting_type': 'gbdt',
     'objective': 'binary', # this is classification problem, two classes
     'metric':metrics,
-    'learning_rate': 0.1,
+    'learning_rate': 0.05,
     'num_leaves': 9,  # we should let it be smaller than 2^(max_depth)
     'max_depth': 5,  # -1 means no limit
     'min_child_samples': 100,  # Minimum number of data need in a child(min_data_in_leaf)
@@ -301,7 +297,7 @@ lgb_params = {
     'min_split_gain': 0,  # lambda_l1, lambda_l2 and min_gain_to_split to regularization
     'nthread': 8,
     'verbose': 0,
-    'scale_pos_weight':99.7, # because training data is extremely unbalanced 
+    'scale_pos_weight':403.74, # because training data is extremely unbalanced 
     'metric':metrics
 }
 
