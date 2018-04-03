@@ -187,7 +187,7 @@ def prep_data( df ):
     
     print( df.info() )
 
-    df.drop( ['ip','day'], axis=1, inplace=True )
+    df.drop( ['day'], axis=1, inplace=True )
     gc.collect()
     print( df.info() )
     
@@ -216,6 +216,8 @@ gp_ip_blacklist['ip_blacklist'] = gp_ip_blacklist['sum']/gp_ip_blacklist['count'
 gp_ip_blacklist.drop(['sum','count'], axis=1, inplace=True)
 gc.collect()
 train_df = train_df.merge(gp_ip_blacklist, on=['ip'], how='left')
+train_df.drop( ['ip'], axis=1, inplace=True )
+gc.collect()
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
@@ -270,6 +272,8 @@ print('Apply IP Blacklist...')
 
 val_df = val_df.merge(gp_ip_blacklist, on=['ip'], how='left')
 val_df['ip_blacklist'] = val_df['ip_blacklist'].fillna(0.0)
+val_df.drop( ['ip'], axis=1, inplace=True )
+gc.collect()
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
@@ -337,6 +341,8 @@ print('Apply IP Blacklist...')
 
 test_df = test_df.merge(gp_ip_blacklist, on=['ip'], how='left')
 test_df['ip_blacklist'] = test_df['ip_blacklist'].fillna(0.0)
+test_df.drop( ['ip'], axis=1, inplace=True )
+gc.collect()
 
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
