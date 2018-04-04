@@ -153,7 +153,7 @@ def prep_data( df ):
     print("Group by channel, hour...")
     gp = df[['ip', 'hour', 'channel']].groupby(by=['channel', 
             'hour'])[['ip']].count().reset_index().rename(index=str, 
-             columns={'channel': 'channel_hr'})
+             columns={'ip': 'channel_hr'})
     df = df.merge(gp, on=['channel', 'hour'], how='left')
     df['channel_hr'] = df['channel_hr'].astype('uint32')
     print( "channel_hr max val = ", df.channel_hr.max() )
