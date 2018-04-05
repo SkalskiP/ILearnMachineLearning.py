@@ -37,8 +37,8 @@ testing_size <- 100000
 val_ratio <- 0.95
 #######################################################
 
-train_path <- "../input/train.csv"
-test_path  <- "../input/test.csv"
+train_path <- "../../input/train.csv"
+test_path  <- "../../input/test.csv"
 
 #######################################################
 
