@@ -50,5 +50,5 @@ sklearn==0.0
 terminado==0.5
 tornado==4.3
 traitlets==4.0.0
-urllib3==1.24.2
+urllib3==1.26.5
 xgboost==0.7.post3
